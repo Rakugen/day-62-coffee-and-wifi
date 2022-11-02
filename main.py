@@ -33,7 +33,6 @@ class CafeForm(FlaskForm):
     submit = SubmitField('Submit')
 
 
-# all Flask routes below
 @app.route("/")
 def home():
     return render_template("index.html")
@@ -43,10 +42,18 @@ def home():
 def add_cafe():
     form = CafeForm()
     if form.validate_on_submit():
-        print("True")
-    # Exercise:
-    # Make the form write a new row into cafe-data.csv
-    # with   if form.validate_on_submit()
+        newdata = [form.cafe.data, form.location.data, form.open_time.data, form.closing_time.data,
+                   form.coffee_rating.data, form.wifi_rating.data, form.power_rating.data]
+        with open('cafe-data.csv', 'a', newline='', encoding="utf-8") as csvfile:
+            cafewriter = csv.writer(csvfile, delimiter=",")
+            cafewriter.writerow(newdata)
+        with open('cafe-data.csv', newline='', encoding="utf-8") as csv_file:
+            csv_data = csv.reader(csv_file, delimiter=',')
+            list_of_rows = []
+            for row in csv_data:
+                list_of_rows.append(row)
+        return render_template('cafes.html', cafes=list_of_rows)
+
     return render_template('add.html', form=form)
 
 
