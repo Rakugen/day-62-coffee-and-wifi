@@ -1,8 +1,13 @@
+<!-- base.html file is used as top level inheritance in our other html pages -->
+<!-- Enables bootstrap styling -->
 {% extends "bootstrap/base.html" %}
+
+<!-- Enables wtf quick forms -->
 {% import "bootstrap/wtf.html" as wtf %}
 
+<!-- Styling to be inherited by our other pages -->
 {% block styles %}
-    {{super()}}
-    <link rel="stylesheet"
-          href="{{url_for('.static', filename='css/styles.css')}}">
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='css/styles.css')}}">
 {% endblock %}

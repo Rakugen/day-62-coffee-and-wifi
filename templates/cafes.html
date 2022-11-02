@@ -1,3 +1,4 @@
+<!--Cafés page with a bootstrap styled table that lists data entries from cafe-data.csv-->
 {% extends 'base.html' %}
 
 {% block title %}Restaurants{% endblock %}
@@ -8,31 +9,28 @@
     <div class="row">
         <div class="col-sm-12">
             <h1>All Cafes</h1>
-
+            <!--Bootstrap styled table using data from flaskform sent by our main.py-->
             <table class="table table-bordered">
                 <tbody>
-
                 {% for cafe in cafes %}
                 <tr>
                     <td>{{cafe[0]}}</td>
+                    <!--Checks for Top row since we don't want an <a> tag link there-->
                     {% if cafe[1] == "Location" %}
-                        <td>{{cafe[1]}}</td>
+                    <td>{{cafe[1]}}</td>
                     {% else %}
-                        <td><a href="{{cafe[1]}}">Maps Link</a></td>
+                    <td><a href="{{cafe[1]}}">Maps Link</a></td>
                     {% endif %}
                     <td>{{cafe[2]}}</td>
                     <td>{{cafe[3]}}</td>
                     <td>{{cafe[4]}}</td>
                     <td>{{cafe[5]}}</td>
                     <td>{{cafe[6]}}</td>
-
                 </tr>
                 {% endfor %}
                 </tbody>
             </table>
-
             <p><a href="{{url_for('home')}}">Return to index page</a></p>
-
         </div>
     </div>
 </div>
